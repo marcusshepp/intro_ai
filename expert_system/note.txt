@@ -1,0 +1,8 @@
+Ideas:
+List of questions?
+all questions will be yes/no or T/F
+catagorize questions based on teirs
+if false for 2 or 3 questions go to lower teir
+
+question dictionary?
+{Q:[answer1, answer2],}
