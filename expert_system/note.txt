@@ -1,8 +1,23 @@
-Ideas:
-List of questions?
-all questions will be yes/no or T/F
-catagorize questions based on teirs
-if false for 2 or 3 questions go to lower teir
+Expert System (The Non-Thinking Machine.)
 
-question dictionary?
-{Q:[answer1, answer2],}
+Author:
+Marcus Shepherd
+
+Date:
+Sept 4, 2015
+
+
+Guess' your skill level based on a series of questions.
+The assumed logic is as follows: If you're blaming others
+and not solely focusing on how YOU can improve -
+you're probably not improving.
+
+
+How to use:
+
+>> python run.py
+**text**
+>> 1
+**text**
+>> 0
+**result**
