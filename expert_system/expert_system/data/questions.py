@@ -6,7 +6,7 @@ from utilities import print_display, append_possible_answers
 
 
 def introduction():
-    display = "\nYou'll be asked a series of ten questions.\nPlease answer these question with:\n"
+    display = "\nYou'll be asked a series of ten questions.\nPlease answer these questions with:\n"
     print append_possible_answers(display)
     display = "At the end of this survey,\nI will accurately perdict what LOL tier you are.\n"
     print display
