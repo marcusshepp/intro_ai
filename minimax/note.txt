@@ -1,0 +1,11 @@
+1.) analysis - enumerate all possible moves
+2.) strategy
+3.) move
+
+• depth && branching factor tell you how complex your decision tree is
+
+MiniMax:
+x = maximizer
+o = minimizer
+
+o will always chose the minimum path, x will always pick the maximum.
