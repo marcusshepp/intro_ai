@@ -6,12 +6,16 @@ Marcus Shepherd
 Date:
 Sept 4, 2015
 
-
+Description:
 Guess' your skill level based on a series of questions.
 The assumed logic is as follows: If you're blaming others
 and not solely focusing on how YOU can improve -
 you're probably not improving.
 
+Language/requirements:
+- Python 2.7
+- Must be able to run Python scripts
+from terminal/command line
 
 How to use:
 
