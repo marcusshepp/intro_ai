@@ -14,10 +14,10 @@ class Game(object):
         return self.display_board()
 
     def display_board(self):
-        print self.board[0]
-        print self.board[1]
-        print self.board[2]
-        return
+        zero = self.board[0]
+        one = self.board[1]
+        two = self.board[2]
+        return "{0}\n{1}\n{2}".format(zero, one, two)
 
     def board_contains_empty_spaces(self):
         for row in self.board:
@@ -27,7 +27,7 @@ class Game(object):
                 return False
         return True
 
-    def winner(self):
+    def possible_win_combinations(self):
         board = self.board
         row_zero = [v for v in board[0]]
         row_one = [v for v in board[1]]
@@ -45,7 +45,7 @@ class Game(object):
             [board[0][0],
             board[1][1],
             board[2][2]])
-        x = [
+        all_possible_win_combinations = [
             row_zero,
             row_one,
             row_two,
@@ -54,13 +54,23 @@ class Game(object):
             column_two,
             forward_slash,
             backward_slash]
-        x = [sum(i) for i in x]
-        p = ""
-        for s in x:
-            if s == -3:
-                p += "O wins!"
-            elif s == 3:
-                p += "X wins!"
+        return all_possible_win_combinations
+
+    def draw(self):
+        if not self.board_contains_empty_spaces():
+            if self.winner() == "":
+                return True
+        return False
+
+    def winner(self):
+        sums_of_win_combinations = [
+            sum(i) for i in self.possible_win_combinations()]
+        return_value = ""
+        for sum_ in sums_of_win_combinations:
+            if sum_ == -3:
+                return_value += "O wins!"
+            elif sum_ == 3:
+                return_value += "X wins!"
             else:
                 continue
-        print p
+        return return_value
