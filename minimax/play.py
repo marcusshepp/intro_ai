@@ -1,11 +1,14 @@
-from tictactoe import Game
-from player import Player
+from minimax.tictactoe import Game
+from minimax.cpu_player import CPUPlayer
 
 g = Game()
-g.board[0][0] = 1
-g.board[1][0] = 1
-g.board[2][0] = 1
-g.board[0][1] = -1
-g.board[0][2] = -1
-g.winner()
-g.display_board()
+cpu = CPUPlayer(piece=-1)
+while not g.is_there_a_winner():
+    x = raw_input()
+    x = int(x)
+    y = raw_input()
+    y = int(y)
+    piece = raw_input()
+    piece = int(piece)
+    g.move(x, y, piece)
+    g.move(*cpu.random_move())
