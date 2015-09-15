@@ -26,3 +26,12 @@ State 5 pushes a score of -10 onto state 3's score list, while the same happens 
 State 6 and 8 generate the only available moves, which are end states, and so both of them add the score of +10 to the move lists of states 3 and 4.
 Because it is O's turn in both state 3 and 4, O will seek to find the minimum score, and given the choice between -10 and +10, both states 3 and 4 will yield -10.
 Finally the score list for states 2, 3, and 4 are populated with +10, -10 and -10 respectively, and state 1 seeking to maximize the score will chose the winning move with score +10, state 2.
+
+DEEP BLUE:
+- alpha beta pruning
+- minimax
+- uneven tree development
+- progressive deepening
+- parallel computing
+- opening moves
+- finishing moves
