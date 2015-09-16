@@ -1,11 +1,11 @@
 class Game(object):
-    
+
     """
     A game of Tic Tac Toe.
     Contains methods that will be useful to a computer
     learning to evaluate board moves.
     """
-    
+
     def __init__(self):
         self.board = [
             [0 for x in range(3)] for i in xrange(3)]
@@ -41,8 +41,8 @@ class Game(object):
         return
 
     def board_contains_empty_spaces(self):
-        """ 
-        Does the current board contain empty spaces? 
+        """
+        Does the current board contain empty spaces?
         """
         for row in self.board:
             if any(v == 0 for v in row):
@@ -80,7 +80,7 @@ class Game(object):
     def is_there_a_winner(self):
         """
         Checks the current board for a winner.
-        :returns: 
+        :returns:
         True if there is a winner.
         else: False
         """
@@ -97,7 +97,7 @@ class Game(object):
         if any(list_of_boolean_indicators):
             return True
         else: return False
-        
+
     def display_winner(self):
         """ If there's a winner display who won. """
         if self.is_there_a_winner():
@@ -106,4 +106,19 @@ class Game(object):
                 if sum(combo) == -3: return "Player: \"O\", wins"
                 elif sum(combo) == 3: return "Player: \"X\", wins"
         else: return "no winner"
-        
+
+    def empties(self):
+        """
+        return a list of tuples.
+        each tuple is an available board
+        position.
+        """
+        tuples = []
+        def zero(n):
+            if n == 0: return True
+            return False
+        for x in xrange(3):
+            for y in xrange(3):
+                if zero(self.board[x][y]):
+                    tuples.append((x, y))
+        return tuples
