@@ -17,7 +17,7 @@ class CPUPlayer(object):
         """
         self.game = game
 
-    def level_one(self):
+    def level_zero(self):
         """
         CPU puts its piece in a random
         available spot on board.
@@ -26,23 +26,46 @@ class CPUPlayer(object):
         i = rand.randint(0, len(empties))
         piece = self.piece
         coor = empties[i]
-        move = {
-        "x": coor[0],
-        "y": coor[1],
-        "piece": piece
-        }
+        move = {"x": coor[0], "y": coor[1], "piece": piece}
         return move
 
-    def level_two(self):
+    def level_one(self):
         """
         CPU puts its piece in an
         available space that creates a
         win if available,
         else randomly selects a spot.
         """
-        pass
+        empties = self.game.empties()
+        for e in empties:
+            if self.game.this_creates_a_win(e[0], e[1], self.piece):
+                move = {"x": e[0], "y": e[1], "piece": self.piece}
+                return move
+        return self.level_zero()
 
+    def level_two(self):
+        """
+        Will win if possible. 
+        Else CPU will block Humans from winning.
+        """
+        empties = self.game.empties()
+        for e in empties:
+            # if CPU can win make that move
+            if self.game.this_creates_a_win(e[0], e[1], self.piece):
+                move = {"x": e[0], "y": e[1], "piece": self.piece}
+                return move
+        for e in empties:
+            # if Human can win block that move
+            if self.game.this_creates_a_win(e[0], e[1], 1):
+                move = {"x": e[0], "y": e[1], "piece": self.piece}
+                return move
+        # if no one can win make random move
+        return self.level_zero()
+    
     def level_three(self):
         """
+        CPU will put a piece in a place that
+        will create a win for itself
+        on next turn.
         """
         pass

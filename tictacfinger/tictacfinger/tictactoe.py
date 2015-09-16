@@ -21,7 +21,7 @@ class Game(object):
             if self.board_contains_empty_spaces():
                 if self.board[x][y] == 0:
                     self.board[x][y] = piece
-                    return self.display_board()
+                    return
                 else: return self.error_messages("occupied")
         else: return False
 
@@ -39,6 +39,15 @@ class Game(object):
         print self.board[2]
         print "\n"
         return
+        
+    def display_winner(self):
+        """ If there's a winner display who won. """
+        if self.there_is_a_winner():
+            # find who won
+            for combo in self.possible_win_combinations():
+                if sum(combo) == -3: return "Player: \"O\", wins"
+                elif sum(combo) == 3: return "Player: \"X\", wins"
+        else: return "no winner"
 
     def board_contains_empty_spaces(self):
         """
@@ -77,7 +86,7 @@ class Game(object):
             column_zero, column_one, column_two,
             forward_slash, backward_slash]
 
-    def is_there_a_winner(self):
+    def there_is_a_winner(self):
         """
         Checks the current board for a winner.
         :returns:
@@ -98,15 +107,6 @@ class Game(object):
             return True
         else: return False
 
-    def display_winner(self):
-        """ If there's a winner display who won. """
-        if self.is_there_a_winner():
-            # find who won
-            for combo in self.possible_win_combinations():
-                if sum(combo) == -3: return "Player: \"O\", wins"
-                elif sum(combo) == 3: return "Player: \"X\", wins"
-        else: return "no winner"
-
     def empties(self):
         """
         return a list of tuples.
@@ -122,3 +122,19 @@ class Game(object):
                 if zero(self.board[x][y]):
                     tuples.append((x, y))
         return tuples
+        
+    def this_creates_a_win(self, x, y, piece):
+        """
+        Return True
+        If move creates win
+        Else False
+        """
+        move = {"x": x, "y": y, "piece": piece}
+        self.move(**move)
+        if self.there_is_a_winner():
+            self.board[x][y] = 0
+            return True
+        self.board[x][y] = 0
+        return False
+            
+        
