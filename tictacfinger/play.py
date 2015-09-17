@@ -9,8 +9,10 @@ if __name__ == "__main__":
     cpu = CPUPlayer(**init_cpu)
     while not g.there_is_a_winner():
         # u = user
-        u_x, u_y = raw_input(), raw_input()
-        u_x, u_y = int(u_x), int(u_y)
+        u_x = raw_input()
+        u_x = int(u_x)
+        u_y = raw_input()
+        u_y = int(u_y)
         g.move(u_x, u_y, 1)
         g.move(**cpu.level_two())
         g.display_board()

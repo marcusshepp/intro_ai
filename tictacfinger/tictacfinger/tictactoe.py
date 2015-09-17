@@ -18,17 +18,20 @@ class Game(object):
         -1 == O
         """
         if x < 3 and y < 3:
-            if self.board_contains_empty_spaces():
-                if self.board[x][y] == 0:
-                    self.board[x][y] = piece
-                    return
-                else: return self.error_messages("occupied")
-        else: return False
+            print "[x][y]: ", self.board[x][y]
+            if self.board[x][y] == 0:
+                self.board[x][y] = piece
+                return
+            else: return self.error_messages("occupied")
+        else: return self.error_messages("Invalid Input")
 
     def error_messages(self, type_of_message):
         if type_of_message == "occupied":
             print "That space on the board is occupied!"
             print "Please try again."
+        if type_of_message == "Invalid Input":
+            print "Enter x, y coordinates!"
+            print "Please only use values 0-2."
 
     def display_board(self):
         """
@@ -39,26 +42,29 @@ class Game(object):
         print self.board[2]
         print "\n"
         return
-        
+
     def display_winner(self):
         """ If there's a winner display who won. """
-        if self.there_is_a_winner():
-            # find who won
-            for combo in self.possible_win_combinations():
-                if sum(combo) == -3: return "Player: \"O\", wins"
-                elif sum(combo) == 3: return "Player: \"X\", wins"
-        else: return "no winner"
+        for combo in self.possible_win_combinations():
+            if sum(combo) == -3:
+                print "Player: \"O\", wins"
+                return
+            elif sum(combo) == 3:
+                print "Player: \"X\", wins"
+                return
+        print "no winner"
+        return
 
-    def board_contains_empty_spaces(self):
-        """
-        Does the current board contain empty spaces?
-        """
-        for row in self.board:
-            if any(v == 0 for v in row):
-                continue
-            else:
-                return False
-        return True
+    # def board_contains_empty_spaces(self):
+    #     """
+    #     Does the current board contain empty spaces?
+    #     """
+    #     for row in self.board:
+    #         if any(v == 0 for v in row):
+    #             continue
+    #         else:
+    #             return False
+    #     return True
 
     def possible_win_combinations(self):
         """
@@ -121,8 +127,9 @@ class Game(object):
             for y in xrange(3):
                 if zero(self.board[x][y]):
                     tuples.append((x, y))
+        print tuples
         return tuples
-        
+
     def this_creates_a_win(self, x, y, piece):
         """
         Return True
@@ -132,9 +139,8 @@ class Game(object):
         move = {"x": x, "y": y, "piece": piece}
         self.move(**move)
         if self.there_is_a_winner():
+            print "Possible winner {0} detected".format(piece)
             self.board[x][y] = 0
             return True
         self.board[x][y] = 0
         return False
-            
-        

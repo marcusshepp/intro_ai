@@ -23,7 +23,7 @@ class CPUPlayer(object):
         available spot on board.
         """
         empties = self.game.empties()
-        i = rand.randint(0, len(empties))
+        i = rand.randint(0, len(empties)-1)
         piece = self.piece
         coor = empties[i]
         move = {"x": coor[0], "y": coor[1], "piece": piece}
@@ -45,7 +45,7 @@ class CPUPlayer(object):
 
     def level_two(self):
         """
-        Will win if possible. 
+        Will win if possible.
         Else CPU will block Humans from winning.
         """
         empties = self.game.empties()
@@ -53,15 +53,24 @@ class CPUPlayer(object):
             # if CPU can win make that move
             if self.game.this_creates_a_win(e[0], e[1], self.piece):
                 move = {"x": e[0], "y": e[1], "piece": self.piece}
+                print "Winning takes priority"
                 return move
         for e in empties:
             # if Human can win block that move
             if self.game.this_creates_a_win(e[0], e[1], 1):
                 move = {"x": e[0], "y": e[1], "piece": self.piece}
+                print "Blocking Opponenet"
                 return move
+        print "returning to random"
         # if no one can win make random move
-        return self.level_zero()
-    
+        i = rand.randint(0, len(empties)-1)
+        piece = self.piece
+        coor = empties[i]
+        print "coor: ", coor
+        move = {"x": coor[0], "y": coor[1], "piece": piece}
+        print "move: ", move
+        return move
+
     def level_three(self):
         """
         CPU will put a piece in a place that
