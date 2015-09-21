@@ -1,5 +1,5 @@
 import random as rand
-
+import operator
 
 class CPUPlayer(object):
     """
@@ -22,6 +22,7 @@ class CPUPlayer(object):
         CPU puts its piece in a random
         available spot on board.
         """
+        print "Making a random move"
         empties = self.game.empties()
         i = rand.randint(0, len(empties)-1)
         piece = self.piece
@@ -59,15 +60,9 @@ class CPUPlayer(object):
             # if Human can win block that move
             if self.game.this_creates_a_win(e[0], e[1], 1):
                 move = {"x": e[0], "y": e[1], "piece": self.piece}
-                print "Blocking Opponenet"
+                print "Blocking Opponent"
                 return move
-        print "returning to random"
-        # if no one can win make random move
-        i = rand.randint(0, len(empties)-1)
-        piece = self.piece
-        coor = empties[i]
-        move = {"x": coor[0], "y": coor[1], "piece": piece}
-        return move
+        return self.level_three()
 
     def level_three(self):
         """
@@ -75,4 +70,20 @@ class CPUPlayer(object):
         will create a win for itself
         on next turn.
         """
-        pass
+        best_win_combos = {}
+        for e in self.game.empties():
+            num_of_possible_wins = self.game.move_creates_n_possible_wins(
+                e[0], e[1], self.piece)
+            if num_of_possible_wins > 0:
+                best_win_combos[(e[0], e[1])] = num_of_possible_wins
+        print best_win_combos
+        sorted_predictions = sorted(
+            best_win_combos.items(), key=operator.itemgetter(1))
+        print sorted_predictions
+        if len(sorted_predictions) > 0:
+            sp = sorted_predictions
+            move = {"x": sp[0][0][0], "y": sp[0][0][1], "piece": self.piece}
+            print move
+            return move
+        else: return self.level_one()
+            

@@ -1,3 +1,6 @@
+import itertools
+import copy
+
 class Game(object):
 
     """
@@ -36,9 +39,17 @@ class Game(object):
         """
         Displays the current state of the board.
         """
-        print self.board[0]
-        print self.board[1]
-        print self.board[2]
+        board = copy.deepcopy(self.board)
+        for x in xrange(3):
+            for y in xrange(3):
+                if board[x][y] == -1:
+                    board[x][y] = "O"
+                elif board[x][y] == 1:
+                    board[x][y] = "X"
+                else: board[x][y] = " "
+        print board[0]
+        print board[1]
+        print board[2]
         print "\n"
         return
 
@@ -53,17 +64,6 @@ class Game(object):
                 return
         print "no winner"
         return
-
-    # def board_contains_empty_spaces(self):
-    #     """
-    #     Does the current board contain empty spaces?
-    #     """
-    #     for row in self.board:
-    #         if any(v == 0 for v in row):
-    #             continue
-    #         else:
-    #             return False
-    #     return True
 
     def possible_win_combinations(self):
         """
@@ -142,3 +142,19 @@ class Game(object):
             return True
         self.board[x][y] = 0
         return False
+    
+    def move_creates_n_possible_wins(self, x, y, piece):
+        """
+        returns the number of possible win
+        combinations a move can yield.
+        """
+        if piece == 1: opponent = -1
+        else: opponent = 1
+        self.board[x][y] = piece
+        i = 0
+        for e in self.empties():
+            if self.this_creates_a_win(e[0], e[1], piece):
+                i += 1
+        self.board[x][y] = 0
+        return i
+            
