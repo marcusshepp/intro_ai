@@ -18,7 +18,6 @@ class Game(object):
         -1 == O
         """
         if x < 3 and y < 3:
-            print "[x][y]: ", self.board[x][y]
             if self.board[x][y] == 0:
                 self.board[x][y] = piece
                 return
@@ -127,7 +126,6 @@ class Game(object):
             for y in xrange(3):
                 if zero(self.board[x][y]):
                     tuples.append((x, y))
-        print tuples
         return tuples
 
     def this_creates_a_win(self, x, y, piece):

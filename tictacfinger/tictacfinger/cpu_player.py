@@ -66,9 +66,7 @@ class CPUPlayer(object):
         i = rand.randint(0, len(empties)-1)
         piece = self.piece
         coor = empties[i]
-        print "coor: ", coor
         move = {"x": coor[0], "y": coor[1], "piece": piece}
-        print "move: ", move
         return move
 
     def level_three(self):
