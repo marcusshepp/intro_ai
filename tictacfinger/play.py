@@ -14,6 +14,7 @@ if __name__ == "__main__":
         u_y = raw_input()
         u_y = int(u_y)
         g.move(u_x, u_y, 1)
+        g.display_board()
         g.move(**cpu.level_two())
         g.display_board()
     g.display_winner()

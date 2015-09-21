@@ -137,12 +137,14 @@ class Game(object):
         move = {"x": x, "y": y, "piece": piece}
         self.move(**move)
         if self.there_is_a_winner():
-            print "Possible winner {0} detected".format(piece)
+            if piece == -1:
+                print "Possible winner \"O\" detected"
+            else: print "Possible winner \"X\" detected"
             self.board[x][y] = 0
             return True
         self.board[x][y] = 0
         return False
-    
+
     def move_creates_n_possible_wins(self, x, y, piece):
         """
         returns the number of possible win
@@ -157,4 +159,3 @@ class Game(object):
                 i += 1
         self.board[x][y] = 0
         return i
-            

@@ -76,14 +76,10 @@ class CPUPlayer(object):
                 e[0], e[1], self.piece)
             if num_of_possible_wins > 0:
                 best_win_combos[(e[0], e[1])] = num_of_possible_wins
-        print best_win_combos
         sorted_predictions = sorted(
             best_win_combos.items(), key=operator.itemgetter(1))
-        print sorted_predictions
         if len(sorted_predictions) > 0:
             sp = sorted_predictions
             move = {"x": sp[0][0][0], "y": sp[0][0][1], "piece": self.piece}
-            print move
             return move
         else: return self.level_one()
-            
