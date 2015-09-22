@@ -33,19 +33,21 @@ class Game(object):
         """
         Checks if there is a draw on the board.
         """
-        for x in xrange(3):
-            for y in xrange(3):
-                if self.board[x][y] != 0:
-                    continue
-                else:
-                    return False
-        print "Draw."
-        return True
-
+        if len(self.empties()) == 0:
+            print "no empties"
+            return True
+        else: return False
+    
     def error_messages(self, type_of_message):
         if type_of_message == "occupied":
             print "That space on the board is occupied!"
             print "Please try again."
+            u_x = raw_input()
+            u_x = int(u_x)
+            u_y = raw_input()
+            u_y = int(u_y)
+            self.move(u_x, u_y, 1)
+            self.display_board()
         if type_of_message == "Invalid Input":
             print "Enter x, y coordinates!"
             print "Please only use values 0-2."
