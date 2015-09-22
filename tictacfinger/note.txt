@@ -35,3 +35,8 @@ DEEP BLUE:
 - parallel computing
 - opening moves
 - finishing moves
+
+
+bugs/problems:
+- not selecting a move that will
+yield most possible win combinations.

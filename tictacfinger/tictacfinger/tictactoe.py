@@ -20,12 +20,27 @@ class Game(object):
         +1 == X
         -1 == O
         """
-        if x < 3 and y < 3:
-            if self.board[x][y] == 0:
-                self.board[x][y] = piece
-                return
-            else: return self.error_messages("occupied")
-        else: return self.error_messages("Invalid Input")
+        if not self.draw():
+            if x < 3 and y < 3:
+                if self.board[x][y] == 0:
+                    self.board[x][y] = piece
+                    return
+                else: return self.error_messages("occupied")
+            else: return self.error_messages("Invalid Input")
+        else: print "Draw."
+
+    def draw(self):
+        """
+        Checks if there is a draw on the board.
+        """
+        for x in xrange(3):
+            for y in xrange(3):
+                if self.board[x][y] != 0:
+                    continue
+                else:
+                    return False
+        print "Draw."
+        return True
 
     def error_messages(self, type_of_message):
         if type_of_message == "occupied":
@@ -137,9 +152,6 @@ class Game(object):
         move = {"x": x, "y": y, "piece": piece}
         self.move(**move)
         if self.there_is_a_winner():
-            if piece == -1:
-                print "Possible winner \"O\" detected"
-            else: print "Possible winner \"X\" detected"
             self.board[x][y] = 0
             return True
         self.board[x][y] = 0
@@ -150,8 +162,6 @@ class Game(object):
         returns the number of possible win
         combinations a move can yield.
         """
-        if piece == 1: opponent = -1
-        else: opponent = 1
         self.board[x][y] = piece
         i = 0
         for e in self.empties():

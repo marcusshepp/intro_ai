@@ -30,24 +30,11 @@ class CPUPlayer(object):
         move = {"x": coor[0], "y": coor[1], "piece": piece}
         return move
 
-    def level_one(self):
+    def level_three(self):
         """
-        CPU puts its piece in an
-        available space that creates a
-        win if available,
-        else randomly selects a spot.
-        """
-        empties = self.game.empties()
-        for e in empties:
-            if self.game.this_creates_a_win(e[0], e[1], self.piece):
-                move = {"x": e[0], "y": e[1], "piece": self.piece}
-                return move
-        return self.level_zero()
-
-    def level_two(self):
-        """
-        Will win if possible.
-        Else CPU will block Humans from winning.
+        CPU will put a piece in a place that
+        will create a win for itself
+        on next turn.
         """
         empties = self.game.empties()
         for e in empties:
@@ -56,30 +43,36 @@ class CPUPlayer(object):
                 move = {"x": e[0], "y": e[1], "piece": self.piece}
                 print "Winning takes priority"
                 return move
+        num_of_possible_human_wins = 0
+        m = ()
         for e in empties:
             # if Human can win block that move
             if self.game.this_creates_a_win(e[0], e[1], 1):
-                move = {"x": e[0], "y": e[1], "piece": self.piece}
-                print "Blocking Opponent"
-                return move
-        return self.level_three()
-
-    def level_three(self):
-        """
-        CPU will put a piece in a place that
-        will create a win for itself
-        on next turn.
-        """
+                num_of_possible_human_wins += 1
+                m = (e[0], e[1])
+        if num_of_possible_human_wins > 1:
+            print "GG"
+            move = {"x": m[0], "y": m[1], "piece": self.piece}
+            print "Blocking Opponent"
+            return move
+        elif num_of_possible_human_wins == 1:
+            print "gotcha!"
+            move = {"x": m[0], "y": m[1], "piece": self.piece}
+            return move
+        # predicting a move that will yield the most
+        # possible win combos on next move.
         best_win_combos = {}
         for e in self.game.empties():
             num_of_possible_wins = self.game.move_creates_n_possible_wins(
                 e[0], e[1], self.piece)
             if num_of_possible_wins > 0:
                 best_win_combos[(e[0], e[1])] = num_of_possible_wins
-        sorted_predictions = sorted(
-            best_win_combos.items(), key=operator.itemgetter(1))
-        if len(sorted_predictions) > 0:
-            sp = sorted_predictions
-            move = {"x": sp[0][0][0], "y": sp[0][0][1], "piece": self.piece}
-            return move
-        else: return self.level_one()
+        print best_win_combos
+        # sorted_predictions = sorted(
+        #     best_win_combos.items(), key=operator.itemgetter(1))
+        # if len(sorted_predictions) > 0:
+        #     print sorted_predictions
+        #     sp = sorted_predictions
+        #     move = {"x": sp[0][0][0], "y": sp[0][0][1], "piece": self.piece}
+        #     return move
+        return self.level_zero() # else: 

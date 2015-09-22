@@ -33,4 +33,8 @@ def move():
     Takes in a list of items.
     puts them on other side.
     """
-    print left_dock.valid_state()
+    items = [fox, chicken, feed]
+    if not left_dock.valid_state():
+        right_dock.add(items[0])
+        left_dock.remove(items[0])
+    print right_dock.items, left_dock.items
