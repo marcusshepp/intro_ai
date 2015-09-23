@@ -28,13 +28,18 @@ class Game(object):
                 else: return self.error_messages("occupied")
             else: return self.error_messages("Invalid Input")
         else: print "Draw."
+        
+    def undo_move(self, x, y, piece):
+        if self.board[x][y] != 0:
+            self.board[x][y] = 0
+        else:
+            print "Can't undo a space that isn't occupied."
 
     def draw(self):
         """
         Checks if there is a draw on the board.
         """
         if len(self.empties()) == 0:
-            print "no empties"
             return True
         else: return False
     
@@ -79,7 +84,7 @@ class Game(object):
             elif sum(combo) == 3:
                 print "Player: \"X\", wins"
                 return
-        print "no winner"
+        print "Draw."
         return
 
     def possible_win_combinations(self):

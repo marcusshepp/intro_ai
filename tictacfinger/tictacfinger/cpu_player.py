@@ -61,6 +61,7 @@ class CPUPlayer(object):
             return move
         # predicting a move that will yield the most
         # possible win combos on next move.
+        print "looking two moves deep"
         best_win_combos = {}
         for e in self.game.empties():
             num_of_possible_wins = self.game.move_creates_n_possible_wins(
@@ -68,11 +69,27 @@ class CPUPlayer(object):
             if num_of_possible_wins > 0:
                 best_win_combos[(e[0], e[1])] = num_of_possible_wins
         if len(best_win_combos.values()) > 0:
-            print best_win_combos
+            # print best_win_combos
             max_prediction = max(
                 best_win_combos.iteritems(), key=operator.itemgetter(1))[0]
-            print max_prediction
+            # print max_prediction
             sp = max_prediction
             move = {"x": sp[0], "y": sp[1], "piece": self.piece}
             return move
-        return self.level_zero() # else: 
+        return self.look_deeper()
+
+    def look_deeper(self):
+        print "looking deeper"
+        best_win_combos = {}
+        for first_move in self.game.empties():
+            self.game.move(first_move[0], first_move[1], self.piece)
+            for second_move in self.game.empties():
+                best_win_combos[(first_move, second_move)] = self.game.move_creates_n_possible_wins(
+                    second_move[0], second_move[1], self.piece)
+            self.game.undo_move(first_move[0], first_move[1], self.piece)
+        if best_win_combos:
+            x = max(best_win_combos.iteritems(), key=best_win_combos.get)[0][0][0]
+            y = max(best_win_combos.iteritems(), key=best_win_combos.get)[0][0][1]
+            move = {"x": x, "y": y, "piece": self.piece}
+            return move
+        else: return self.level_zero()

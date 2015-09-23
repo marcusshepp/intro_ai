@@ -13,6 +13,8 @@ if __name__ == "__main__":
     Enter: 0, 1 or 2
     First value is the row.
     Second value is the column.
+    You are "X".
+    The CPU is "O".
     
     Example:
     [in]:
@@ -62,3 +64,4 @@ if __name__ == "__main__":
             g.move(u_x, u_y, 1)
             g.display_board()
         g.display_winner()
+        
