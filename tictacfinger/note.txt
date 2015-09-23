@@ -42,17 +42,6 @@ bugs/problems:
 yield most possible win combinations.
 
 testcases:
-h
-h
-h
-c
-c
-c
-c
-c
-c
-d
-d
-d
-d
-d
+hhhh
+ccccccccccc
+ddddddddddd
