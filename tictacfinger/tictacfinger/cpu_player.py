@@ -61,7 +61,7 @@ class CPUPlayer(object):
             return move
         # predicting a move that will yield the most
         # possible win combos on next move.
-        print "looking two moves deep"
+        # print "looking two moves deep"
         best_win_combos = {}
         for e in self.game.empties():
             num_of_possible_wins = self.game.move_creates_n_possible_wins(
@@ -79,7 +79,7 @@ class CPUPlayer(object):
         return self.look_deeper()
 
     def look_deeper(self):
-        print "looking deeper"
+        # print "looking deeper"
         best_win_combos = {}
         for first_move in self.game.empties():
             self.game.move(first_move[0], first_move[1], self.piece)

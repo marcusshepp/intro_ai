@@ -1,0 +1,14 @@
+Tic Tac Toe
+Intro to AI
+
+Author:
+Marcus Shepherd
+
+Professor:
+Dr. Morelli
+
+To use:
+run `python play.py`
+
+Some info:
+First turn is randomly selected.

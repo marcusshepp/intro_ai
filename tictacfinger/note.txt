@@ -44,4 +44,4 @@ yield most possible win combinations.
 testcases:
 hhhh
 ccccccccccc
-ddddddddddd
+ddddddddddddd
