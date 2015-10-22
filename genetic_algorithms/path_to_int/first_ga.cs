@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace GAS
@@ -7,11 +7,11 @@ namespace GAS
 	{
 
 		/* Path to Int.
-		 * 
+		 *
 		 * My first take on genetic algorithms.
 		 * Inspiration and idea for problem space
 		 * came from (http://www.ai-junkie.com/ga/intro/gat1.html).
-		 * 
+		 *
 		 * Summary:
 		 * Finds a path to integer `GOAL` ranging from 0 - 81.
 		 * Using  the following tools:
@@ -19,7 +19,7 @@ namespace GAS
 		 *     - y = 0 - 9
 		 *     - i = `possible operators`
 		 *
-		 * 
+		 *
 		 */
 
 		static string [] possible_operators = {"+", "-", "/", "*"};
@@ -37,10 +37,10 @@ namespace GAS
 		}
 
 		/* Encoding
-		 * 
+		 *
 		 * The following are methods that perform
 		 * Bit Masking and Bit Shifting.
-		 * extracting the problem from bits 
+		 * extracting the problem from bits
 		 * creates a way for the computer to
 		 * find a solution faster.
 		*/
@@ -103,7 +103,7 @@ namespace GAS
 		}
 
 		static bool is_solution(int chromosome){
-			/* :returns: true if is solution 
+			/* :returns: true if is solution
 			 *           else false
 			*/
 			int goal = GOAL;
@@ -116,7 +116,7 @@ namespace GAS
 		}
 
 		static int fitness_score(int chrome) {
-			/* evaluates a chromosome and outputs its fitness score. 
+			/* evaluates a chromosome and outputs its fitness score.
 			 * highly dependant on GOAL
 			*/
 			int goal = GOAL;
@@ -125,13 +125,13 @@ namespace GAS
 		}
 
 		static int select_partner(int[] population){
-			/* 
-			 * select two random contestants 
+			/*
+			 * select two random contestants
 			 * compare fitness.
 			 * lower fitness (closer to 0)
 			 * gets to breed.
-			 * 
-			 */ 
+			 *
+			 */
 			Random rand = new Random ();
 			int a = rand.Next (0, 100);
 			int b = rand.Next (0, 100);
@@ -158,7 +158,7 @@ namespace GAS
 				 * p1 = 1111100000
 				 * c0 = 1111111111
 				 * c1 = 0000000000
-				 */ 
+				 */
 				int male_first_half = get_first_half (parents [0]);
 				int male_second_half = get_second_half (parents [0]);
 				int female_first_half = get_first_half (parents [1]);
@@ -175,16 +175,16 @@ namespace GAS
 		}
 
 		static int mutate(int chromosome){
-			/* 
+			/*
 			 * mutate the given decimal
 			 * by randomly choosing a bit
 			 * and XOR it with a one.
 			 * 0 xor 1 = 1
 			 * 1 xor 1 = 0
-			 * 
+			 *
 			 * *note*
 			 * must shift bit to desired allel
-			 * 
+			 *
 			 */
 			Random rand = new Random ();
 			int bit_to_flip = rand.Next (0, 10);
@@ -214,7 +214,7 @@ namespace GAS
 			int population_size = 100;
 			int[] population = initialize_population (population_size);
 			int num_of_generations = 100;
-		
+
 			for (int generations = 0; generations <= num_of_generations; generations++) {
 				List<int> new_pop = new List<int>();
 				for (int x = 0; x < 100; x++) {
