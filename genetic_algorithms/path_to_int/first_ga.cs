@@ -205,10 +205,10 @@ namespace GAS
 		     *             if is_solution(pop[pop_index]) do
 		     *                 return pop[pop_index]
 		     *             parents = [pop[pop_index], select_partner(pop)]
-		     * 			   children = [mutate(crossover(parents))]
-		     * 		       child = best(children)
+		     * 			       children = [mutate(crossover(parents))]
+		     * 		         child = best(children)
 		     * 			   new_pop.append(child)
-		     *		   	   pop.remove(pop_index)
+		     *		   	     pop.remove(pop_index)
 		     *     return best_answer(pop)
 		     */
 			int population_size = 100;
