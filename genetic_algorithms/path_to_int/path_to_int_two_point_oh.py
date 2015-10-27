@@ -12,7 +12,6 @@ def init_pop(size):
     population = []
     for i in range(size):
         population.append(r.randrange(0, 4294967295))
-    print population
     return population
 
 def decode(chromosome):
@@ -48,7 +47,7 @@ def select_partner(population):
 def crossover(parents):
     """
     in: parents [2]
-    out: children [2]
+    out: children [1]
     rate: 0.5
     """
     def get_first_half(c):
@@ -59,13 +58,9 @@ def crossover(parents):
     crossover_decision = 1
     if crossover_decision:
         male_first_half = get_first_half(parents[0])
-        male_second_half = get_second_half(parents[0])
-        female_first_half = get_first_half(parents[1])
         female_second_half = get_second_half(parents[1])
-        children = []
-        children.append(male_first_half | female_second_half)
-        children.append(female_first_half | male_second_half)
-        return children
+        child = (male_first_half | female_second_half)
+        return child
     else: return parents
 
 def mutate(chromosome):
@@ -140,14 +135,10 @@ def generations(gen_size):
                 print "SOLUTION FOUND"
                 print chrome_to_string(chromosome)
                 return
-w            parents = [chromosome, select_partner(population)]
-            crossed_parents = crossover(parents)
-            mutated_child_one = mutate(crossed_parents[0])
-            mutated_child_two = mutate(crossed_parents[1])
-            if fitness(mutated_child_one) > fitness(mutated_child_one):
-                temp_population.append(mutated_child_one)
-            else:
-                temp_population.append(mutated_child_two)
+            parents = [chromosome, select_partner(population)]
+            crossed_child = crossover(parents)
+            mutated_child = mutate(crossed_child)
+            temp_population.append(mutated_child)
         gen += 1
         print "Generation: ", gen
         print "Maximum Fitness Score: ", max_fitness(population)
