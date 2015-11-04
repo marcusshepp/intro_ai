@@ -2,7 +2,7 @@ import random as r
 import copy
 
 
-GOAL = 200
+GOAL = 400
 
 def init_pop(size):
     """

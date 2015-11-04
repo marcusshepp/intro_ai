@@ -108,16 +108,16 @@ public class AdamsCarController : CarController {
 		int first_direction = (chromosome & 7);
 
 		/* 000 000 000 111 000 */
-		int second_direction = (chromosome & 56 >> 3);
+		int second_direction = ((chromosome & 56) >> 3);
         Debug.Log("first_direction " + first_direction + " second_direction " + second_direction);
 		/* 000 000 111 000 000 */
-		int third_direction = (chromosome & 448 >> 6);
+		int third_direction = ((chromosome & 448) >> 6);
         Debug.Log("third_direction " + third_direction);
 		/* 000 111 000 000 000 */
-		int fourth_direction = (chromosome & 3584 >> 9);
+		int fourth_direction = ((chromosome & 3584) >> 9);
         Debug.Log("fourth_direction " + fourth_direction);
 		/* 111 000 000 000 000 */
-		int fifth_direction = (chromosome & 28672 >> 12);
+		int fifth_direction = ((chromosome & 28672) >> 12);
         Debug.Log("fifth_direction " + fifth_direction);
 		string[] possible_moves = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
 		string[] move_sequence = new string[5];
