@@ -5,11 +5,15 @@ A genetic algorithm that finds a valid combination of weights and thresholds
 for an Artificial Neural Network.
 
 
+----------------------------------------------------------------
+
 
 in: x = 1 or 0, y = 1 or 0
 
 out: x xor y
 
+
+----------------------------------------------------------------
 
 
 Number of generations it took to find a solution given 10 trials:
