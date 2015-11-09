@@ -1,0 +1,12 @@
+CPS 480 Genetic Algorithm Assignment
+
+submission by:
+Marcus Shepherd
+sheph2mj
+
+
+My GA sometimes only needs one generation to find a solution. But to be confident I set it to two hunderd.
+
+I chose a population size of 50 because it was the max aloud. Also, the larger the population size the faster my GA finds a solution.
+
+At first I had a mutation rate of 0.5. But after trial and error I found that a mutation rate of 1 (always mutate) gives me a solution is less generations. So, I went with the latter.
