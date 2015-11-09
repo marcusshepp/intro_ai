@@ -1,1 +1,1 @@
-![photo](drawing.pdf?raw=true "Title")
+![photo](drawing.jpg?raw=true "Title")
