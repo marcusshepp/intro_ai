@@ -15,7 +15,17 @@ out: x xor y
 
 ----------------------------------------------------------------
 
+Encoding:
 
+I used what is called "Value Encoding". Which means
+
+that I used real world values as the allels in the chromosomes.
+
+Each chromosome is an array of 19 values ranging from -255 to 255.
+
+chromosome[0 ... 12] are the weights and chromosome[12 ... 18] are the thresholds.
+
+----------------------------------------------------------------
 Number of generations it took to find a solution given 10 trials:
 
 (population size = 50)
